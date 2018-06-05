@@ -15,6 +15,14 @@ export default function ( ) {
             email: "petrov@gmail.com",
             phone: "222-2222-2222",
             picture: ""
+        },
+        {
+            id: 3,
+            name: "Сергей Сидоров",
+            company: "Фейсбук",
+            email: "sidorov@facebook.com",
+            phone: "333-3333-3333",
+            picture: ""
         }
     ]
 }
