@@ -2,7 +2,6 @@ import React from 'react';
 import UserList from '../containers/user-list';
 import Details from '../containers/details'
 
-
 const App = () => (
     <div>
         <h3>Пользователи:</h3>

@@ -2,35 +2,42 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import User from './user';
-import {select} from '../actions/index';
+import {select, filter} from '../actions/index';
+import SearchPlugin from './search-plugin';
 
 class  UserList extends Component {
-    showList () {
-      return this.props.users.map ((user) => {
-          return (
-              <User key={user.id} user={user} select={this.props.select}/>
-          );
-      });
-    }
+
     render() {
         return (
-            <ol>
-                {this.showList()}
-            </ol>
+            <div>
+                <SearchPlugin filter={this.props.filter}/>
+                <ol>
+                    {
 
+                        this.props.filtered.map ((user) => {
+                            return (
+                                <User key={user.id} user={user} select={this.props.select}/>
+                            );
+                        })
+                    }
+                </ol>
+            </div>
         );
     }
 }
 
 function mapStateToProps (state) {
     return {
-        users: state.users
+        filtered: state.filtered
     };
 }
 
 function matchDispatchToProps (dispatch) {
-    return bindActionCreators({select: select}, dispatch)
-
+    return bindActionCreators({
+        select: select,
+        filter: filter
+    },
+        dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(UserList);

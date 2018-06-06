@@ -4,3 +4,10 @@ export const select = (user) => {
         payload: user
     }
 };
+
+export const filter = (text) => {
+    return {
+        type: "FILTER_LIST",
+        payload: text
+    }
+};

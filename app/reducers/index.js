@@ -1,10 +1,11 @@
 import {combineReducers} from 'redux';
-import usersList from './users';
-import userActive from './user-active'
+import users from './users';
+import active from './user-active'
+import filtered from './search-plugin'
 
 const allReducers = combineReducers({
-    users: usersList,
-    active: userActive
+    active: active,
+    filtered: filtered
 });
 
 export default allReducers;
