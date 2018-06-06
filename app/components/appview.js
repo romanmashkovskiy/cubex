@@ -4,7 +4,7 @@ import Details from '../containers/details'
 
 const App = () => (
     <div>
-        <h3>Пользователи:</h3>
+        <h3>Список контактов:</h3>
         <UserList/>
         <hr/>
         <h3>Детальная информация:</h3>

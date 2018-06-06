@@ -3,26 +3,34 @@ export default function ( ) {
         {
             id: 1,
             name: "Иван Иванов",
-            company: "Майкрософт",
+            company: "Microsoft",
             email: "ivanov@microsoft.com",
             phone: "111-1111-1111",
-            picture: ""
+            picture: "https://avatarko.ru/img/kartinka/15/multfilm_ochki_Simpsons_Homer_14019.jpg"
         },
         {
             id: 2,
             name: "Петр Петров",
-            company: "Гугл",
+            company: "Google",
             email: "petrov@gmail.com",
             phone: "222-2222-2222",
-            picture: ""
+            picture: "https://avatarko.ru/img/kartinka/1/multfilm_gomer.png"
         },
         {
             id: 3,
             name: "Сергей Сидоров",
-            company: "Фейсбук",
+            company: "Facebook",
             email: "sidorov@facebook.com",
             phone: "333-3333-3333",
-            picture: ""
+            picture: "https://avatarko.ru/img/kartinka/14/multfilm_Simpsons_Homer_13344.jpg"
+        },
+        {
+            id: 4,
+            name: "Александр Иванов",
+            company: "Apple",
+            email: "ivanov@facebook.com",
+            phone: "444-4444-4444",
+            picture: "https://avatarko.ru/img/kartinka/1/Gomer_s_pistoletom.jpg"
         }
     ]
 }

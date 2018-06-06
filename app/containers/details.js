@@ -11,9 +11,9 @@ class Details extends Component {
         return (
             <div>
                 <h2>{this.props.user.name}</h2>
-                <img src={this.props.user.picture} />
-                <p>Организация: {this.props.user.company}</p>
-                <p>Электронная почта: {this.props.user.email}</p>
+                <img style={{height: '150px', width: '150px'}} src={this.props.user.picture} />
+                <p>Компания: {this.props.user.company}</p>
+                <p>Email: {this.props.user.email}</p>
                 <p>Телефон: {this.props.user.phone}</p>
             </div>
         );
