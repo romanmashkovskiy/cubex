@@ -17,7 +17,7 @@ class  ContactList extends Component {
         if (isNewAddMode) {
             return (
                 <div>
-                    <button onClick={() => this.setState({isNewAddMode: false})}>Отмена добавления</button>
+                    <button onClick={() => this.setState({isNewAddMode: false})}>Завершить добавление</button>
                     <SearchPlugin filter={this.props.filter}/>
                     <ol>
                         {

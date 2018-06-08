@@ -57,7 +57,8 @@ export default function (state=contacts, action) {
                     picture: action.payload.picture
                 };
                 contacts.push(newContact);
-                return [...state, newContact];
+                return [...contacts];
+
 
             }
         case "DELETE_CONTACT":

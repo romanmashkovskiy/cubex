@@ -15,7 +15,7 @@ class Contact extends Component {
                         {this.props.contact.name}
                     </li>
                     <button onClick={() => this.props.delete(this.props.contact)}>Удалить</button>
-                    <button onClick={() => this.setState({isEditMode: false})}>Отмена редактирования</button>
+                    <button onClick={() => this.setState({isEditMode: false})}>Завершить редактирование</button>
                     <EditContact contact={this.props.contact} edit={this.props.edit}/>
                 </div>
             );
