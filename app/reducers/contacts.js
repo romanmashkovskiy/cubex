@@ -38,9 +38,8 @@ export default function (state=contacts, action) {
         case "FILTER_LIST":
             {
                 let filteredList = contacts.filter(function(contact){
-                    return contact.name.toLowerCase().search(action.payload.toLowerCase())!== -1;
+                   return contact.name.toLowerCase().includes(action.payload.toLowerCase());
                 });
-                //return filteredList;
                 return [...filteredList];
             }
         case "ADD_CONTACT":
@@ -57,12 +56,38 @@ export default function (state=contacts, action) {
                     phone: action.payload.phone,
                     picture: action.payload.picture
                 };
-                // contacts.push(newContact);
-                // console.log(contacts);
-                console.log(newContact);
+                contacts.push(newContact);
                 return [...state, newContact];
 
             }
+        case "DELETE_CONTACT":
+            {
+                let delIndex;
+                state.forEach(function(item, index) {
+                    if (action.payload.id === item.id) delIndex = index;
+                });
+                console.log(delIndex);
+                let filteredList = state.filter(function(contact, index){
+                    return index !== delIndex;
+                });
+                contacts.splice(delIndex,1);
+                return [...filteredList];
+
+            }
+        case "EDIT_CONTACT":
+            {
+                let replIndex;
+                state.forEach(function(item, index) {
+                    if (action.payload.id === item.id) replIndex = index;
+                });
+                delete state[replIndex];
+                state[replIndex] = action.payload;
+
+                delete contacts[replIndex];
+                contacts[replIndex] = action.payload;
+
+                return [...state];
+        }
         default:
             return state;
     }

@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import { connect } from 'react-redux';
-import {addContact} from '../actions/index';
 
 class  AddContact extends Component {
     constructor(props) {
