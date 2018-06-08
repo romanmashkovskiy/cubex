@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import User from './user';
+import Contact from './contact';
 import {select, filter} from '../actions/index';
 import SearchPlugin from './search-plugin';
+import  AddContact from '../containers/add-contact'
+import {addContact} from "../actions";
 
-class  UserList extends Component {
+class  ContactList extends Component {
 
     render() {
         return (
@@ -14,13 +16,15 @@ class  UserList extends Component {
                 <ol>
                     {
 
-                        this.props.filtered.map ((user) => {
+                        this.props.filtered.map ((contact) => {
                             return (
-                                <User key={user.id} user={user} select={this.props.select}/>
+                                <Contact key={contact.id} contact={contact} select={this.props.select}/>
                             );
                         })
                     }
                 </ol>
+                <h3>Добавить контакт:</h3>
+                <AddContact addContact={this.props.addContact}/>
             </div>
         );
     }
@@ -35,9 +39,10 @@ function mapStateToProps (state) {
 function matchDispatchToProps (dispatch) {
     return bindActionCreators({
         select: select,
-        filter: filter
+        filter: filter,
+        addContact: addContact
     },
         dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(UserList);
+export default connect(mapStateToProps, matchDispatchToProps)(ContactList);

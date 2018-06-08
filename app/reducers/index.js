@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux';
-import users from './users';
-import active from './user-active'
-import filtered from './search-plugin'
+import active from './contact-active'
+import filtered from './contacts'
 
 const allReducers = combineReducers({
     active: active,

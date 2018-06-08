@@ -1,7 +1,7 @@
-export const select = (user) => {
+export const select = (contact) => {
     return {
-        type: "USER_SELECTED",
-        payload: user
+        type: "CONTACT_SELECTED",
+        payload: contact
     }
 };
 
@@ -9,5 +9,12 @@ export const filter = (text) => {
     return {
         type: "FILTER_LIST",
         payload: text
+    }
+};
+
+export const addContact = (contact) => {
+    return {
+        type: "ADD_CONTACT",
+        payload: contact
     }
 };

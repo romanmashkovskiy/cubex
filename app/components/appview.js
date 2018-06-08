@@ -1,11 +1,13 @@
 import React from 'react';
-import UserList from '../containers/user-list';
+import ContactList from '../containers/contact-list';
 import Details from '../containers/details'
+import  AddContact from '../containers/add-contact'
 
 const App = () => (
     <div>
         <h3>Список контактов:</h3>
-        <UserList/>
+        <ContactList/>
+
         <hr/>
         <h3>Детальная информация:</h3>
         <Details />
