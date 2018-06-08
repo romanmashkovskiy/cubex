@@ -44,6 +44,7 @@ class  AddContact extends Component {
                     this.refs.email.value=
                         this.refs.phone.value=
                             this.refs.picture.value='';
+            this.props.setAddMode(false);
         }
     }
 

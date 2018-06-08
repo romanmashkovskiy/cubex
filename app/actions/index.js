@@ -32,3 +32,19 @@ export const editContact = (contact) => {
         payload: contact
     }
 };
+
+export const setAddMode = (mode) => {
+    return {
+        type: "ADD_MODE",
+        payload: mode
+    }
+};
+
+export const setEditMode = (contact, mode) => {
+    return {
+        type: "EDIT_MODE",
+        contact: contact,
+        mode: mode
+    }
+};
+

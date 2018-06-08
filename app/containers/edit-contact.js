@@ -39,7 +39,8 @@ class  EditContact extends Component {
                 company: this.refs.company.value,
                 email: this.refs.email.value,
                 phone: this.refs.phone.value,
-                picture: this.refs.picture.value
+                picture: this.refs.picture.value,
+                editMode: false
             });
 
         }

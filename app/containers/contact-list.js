@@ -4,20 +4,16 @@ import { connect } from 'react-redux';
 import Contact from './contact';
 import SearchPlugin from './search-plugin';
 import  AddContact from '../containers/add-contact'
-import { editContact, deleteContact, addContact, select, filter} from "../actions";
+import { setEditMode, setAddMode, editContact, deleteContact, addContact, select, filter} from "../actions";
 
 
 class  ContactList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {isNewAddMode: false};
-    }
+
     render() {
-        const isNewAddMode=this.state.isNewAddMode;
-        if (isNewAddMode) {
+        if (this.props.addMode) {
             return (
                 <div>
-                    <button onClick={() => this.setState({isNewAddMode: false})}>Завершить добавление</button>
+                    <button onClick={() => this.props.setAddMode(false)}>Отменить добавление</button>
                     <SearchPlugin filter={this.props.filter}/>
                     <ol>
                         {
@@ -25,19 +21,20 @@ class  ContactList extends Component {
                             this.props.filtered.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
-                                             delete={this.props.deleteContact} edit={this.props.editContact}/>
+                                             delete={this.props.deleteContact} edit={this.props.editContact}
+                                             setEditMode={this.props.setEditMode}/>
                                 );
                             })
                         }
                     </ol>
                     <h3>Внесите данные</h3>
-                    <AddContact addContact={this.props.addContact}/>
+                    <AddContact addContact={this.props.addContact} setAddMode={this.props.setAddMode}/>
                 </div>
             );
         } else {
             return (
                 <div>
-                    <button onClick={() => this.setState({isNewAddMode: true})}>Добавить контакт</button>
+                    <button onClick={() => this.props.setAddMode(true)}>Добавить контакт</button>
                     <SearchPlugin filter={this.props.filter}/>
                     <ol>
                         {
@@ -45,7 +42,8 @@ class  ContactList extends Component {
                             this.props.filtered.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
-                                             delete={this.props.deleteContact} edit={this.props.editContact}/>
+                                             delete={this.props.deleteContact} edit={this.props.editContact}
+                                             setEditMode={this.props.setEditMode}/>
                                 );
                             })
                         }
@@ -59,7 +57,8 @@ class  ContactList extends Component {
 
 function mapStateToProps (state) {
     return {
-        filtered: state.filtered
+        filtered: state.filtered,
+        addMode: state.addMode,
     };
 }
 
@@ -69,7 +68,9 @@ function matchDispatchToProps (dispatch) {
         filter: filter,
         addContact: addContact,
         deleteContact: deleteContact,
-        editContact: editContact
+        editContact: editContact,
+        setAddMode: setAddMode,
+        setEditMode: setEditMode
     },
         dispatch)
 }
