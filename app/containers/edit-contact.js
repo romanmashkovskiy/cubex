@@ -14,7 +14,7 @@ class  EditContact extends Component {
         return company.length>2;
     }
     validateEmail(email) {
-        return email.length>2;
+        return email.includes("@");
     }
     validatePhone(phone) {
         return phone.length>2;

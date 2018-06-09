@@ -1,7 +1,6 @@
 import React from 'react';
 import ContactList from '../containers/contact-list';
 import Details from '../containers/details'
-import  AddContact from '../containers/add-contact'
 
 const App = () => (
     <div>

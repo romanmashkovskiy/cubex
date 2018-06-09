@@ -3,20 +3,16 @@ import React, {Component} from 'react';
 class  AddContact extends Component {
     constructor(props) {
         super(props);
-        this.state = {isVisible: true};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     validateName(name) {
-        if (name.length > 2) {
-            return true;
-        }
-        this.refs.name.classList.add()
+        return name.length>2;
     }
     validateCompany(company) {
         return company.length>2;
     }
     validateEmail(email) {
-        return email.length>2;
+        return email.includes("@");
     }
     validatePhone(phone) {
         return phone.length>2;
@@ -27,7 +23,6 @@ class  AddContact extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         if (this.validateName(this.refs.name.value) &&
             this.validateCompany(this.refs.company.value) &&
             this.validateEmail(this.refs.email.value) &&
@@ -90,11 +85,11 @@ class  AddContact extends Component {
                 </div>
                 <div className="field">
                     <label>Email</label>
-                    <input ref="text" type="email" placeholder="Email"/>
+                    <input ref="email" type="text" placeholder="Email"/>
                 </div>
                 <div className="field">
-                    <label>Телефон</label>
-                    <input ref="phone" type="text" placeholder="Телефон"/>
+                    <label>Телефон в формате</label>
+                    <input ref="phone" type="text" placeholder="Телефон" />
                 </div>
                 <div className="field">
                     <label>Фото(ссылка)</label>
