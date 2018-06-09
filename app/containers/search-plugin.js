@@ -12,7 +12,12 @@ class  SearchPlugin extends Component {
     }
 
     render() {
-        return <input placeholder="Поиск" onChange={this.onTextChanged}/>;
+        return (
+            <div className="ui small icon input">
+                <input type="text" placeholder="Найти контакт" onChange={this.onTextChanged}/>
+                    <i className="search icon"></i>
+            </div>
+            );
     }
 }
 

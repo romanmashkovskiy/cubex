@@ -13,9 +13,11 @@ class  ContactList extends Component {
         if (this.props.addMode) {
             return (
                 <div>
-                    <button onClick={() => this.props.setAddMode(false)}>Отменить добавление</button>
                     <SearchPlugin filter={this.props.filter}/>
-                    <ol>
+                    <button className="ui secondary button right floated" onClick={() => this.props.setAddMode(false)}>Отменить добавление</button>
+                    <h3 className="ui header">Внесите данные</h3>
+                    <AddContact addContact={this.props.addContact} setAddMode={this.props.setAddMode}/>
+                    <div className="ui middle aligned divided list">
                         {
 
                             this.props.filtered.map ((contact) => {
@@ -26,17 +28,15 @@ class  ContactList extends Component {
                                 );
                             })
                         }
-                    </ol>
-                    <h3>Внесите данные</h3>
-                    <AddContact addContact={this.props.addContact} setAddMode={this.props.setAddMode}/>
+                    </div>
                 </div>
             );
         } else {
             return (
                 <div>
-                    <button onClick={() => this.props.setAddMode(true)}>Добавить контакт</button>
                     <SearchPlugin filter={this.props.filter}/>
-                    <ol>
+                    <button className="ui positive button right floated" onClick={() => this.props.setAddMode(true)}>Добавить контакт</button>
+                    <div className="ui middle aligned divided list">
                         {
 
                             this.props.filtered.map ((contact) => {
@@ -47,7 +47,7 @@ class  ContactList extends Component {
                                 );
                             })
                         }
-                    </ol>
+                    </div>
                 </div>
             )
         }

@@ -5,16 +5,30 @@ class Details extends Component {
     render () {
         if (!this.props.contact) {
             return (
-              <p>Выберите пользователя</p>
+                <h4 className="ui header">Выберите пользователя</h4>
             );
         }
         return (
-            <div>
-                <h2>{this.props.contact.name}</h2>
-                <img style={{height: '150px', width: '150px'}} alt="ФОТО" src={this.props.contact.picture} />
-                <p>Компания: {this.props.contact.company}</p>
-                <p>Email: {this.props.contact.email}</p>
-                <p>Телефон: {this.props.contact.phone}</p>
+            <div className="ui segment">
+                <img style={{height: '200px', width: '150px'}} className="ui centered medium image" src={this.props.contact.picture}/>
+                <form className="ui form">
+                    <div className="field">
+                        <label>Фамилия и имя</label>
+                        <input type="text" value={this.props.contact.name}/>
+                    </div>
+                    <div className="field">
+                        <label>Компания</label>
+                        <input type="text" value={this.props.contact.company}/>
+                    </div>
+                    <div className="field">
+                        <label>Email</label>
+                        <input type="text" value={this.props.contact.email}/>
+                    </div>
+                    <div className="field">
+                        <label>Телефон</label>
+                        <input type="text" value={this.props.contact.phone}/>
+                    </div>
+                </form>
             </div>
         );
     }

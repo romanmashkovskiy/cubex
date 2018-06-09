@@ -50,28 +50,28 @@ class  AddContact extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <p>
-                    <label>Фамилия и имя:</label><br />
-                    <input ref="name" type="text" required/>
-                </p>
-                <p>
-                    <label>Компания:</label><br />
-                    <input ref="company" type="text" />
-                </p>
-                <p>
-                    <label>Email:</label><br />
-                    <input ref="email" type="text" />
-                </p>
-                <p>
-                    <label>Телефон:</label><br />
-                    <input ref="phone" type="text" />
-                </p>
-                <p>
-                    <label>Фото:</label><br />
-                    <input ref="picture" type="text" />
-                </p>
-                <input type="submit" value="Добавить контакт" />
+            <form className="ui form" onSubmit={this.handleSubmit}>
+                <div className="field">
+                    <label>Фамилия и имя</label>
+                    <input ref="name" type="text" placeholder="Фамилия и имя" required/>
+                </div>
+                <div className="field">
+                    <label>Компания</label>
+                    <input ref="company" type="text" placeholder="Компания"/>
+                </div>
+                <div className="field">
+                    <label>Email</label>
+                    <input ref="email" type="email" placeholder="Email"/>
+                </div>
+                <div className="field">
+                    <label>Телефон</label>
+                    <input ref="phone" type="text" placeholder="Телефон"/>
+                </div>
+                <div className="field">
+                    <label>Фото(ссылка)</label>
+                    <input ref="picture" type="text" placeholder="Picture"/>
+                </div>
+                <button className="ui positive button" type="submit">Добавить контакт</button>
             </form>
         )
     }
