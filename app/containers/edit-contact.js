@@ -43,6 +43,32 @@ class  EditContact extends Component {
                 editMode: false
             });
 
+        } else {
+            if (this.validateName(this.refs.name.value)) {
+                this.refs.name.parentElement.className = "field";
+            } else {
+                this.refs.name.parentElement.className = "field error";
+            }
+            if (this.validateCompany(this.refs.company.value)) {
+                this.refs.company.parentElement.className = "field";
+            } else {
+                this.refs.company.parentElement.className = "field error";
+            }
+            if (this.validateEmail(this.refs.email.value)) {
+                this.refs.email.parentElement.className = "field";
+            } else {
+                this.refs.email.parentElement.className = "field error";
+            }
+            if (this.validatePhone(this.refs.phone.value)) {
+                this.refs.phone.parentElement.className = "field";
+            } else {
+                this.refs.phone.parentElement.className = "field error";
+            }
+            if (this.validatePicture(this.refs.picture.value)) {
+                this.refs.picture.parentElement.className = "field";
+            } else {
+                this.refs.picture.parentElement.className = "field error";
+            }
         }
     }
 
@@ -51,7 +77,7 @@ class  EditContact extends Component {
                 <form className="ui form" onSubmit={this.handleSubmit}>
                     <div className="field">
                         <label>Фамилия и имя</label>
-                        <input ref="name" type="text" placeholder="Фамилия и имя" defaultValue={this.props.contact.name} required/>
+                        <input ref="name" type="text" placeholder="Фамилия и имя" defaultValue={this.props.contact.name}/>
                     </div>
                     <div className="field">
                         <label>Компания</label>
@@ -59,7 +85,7 @@ class  EditContact extends Component {
                     </div>
                     <div className="field">
                         <label>Email</label>
-                        <input ref="email" type="email" defaultValue={this.props.contact.email} placeholder="Email"/>
+                        <input ref="email" type="text" defaultValue={this.props.contact.email} placeholder="Email"/>
                     </div>
                     <div className="field">
                         <label>Телефон</label>

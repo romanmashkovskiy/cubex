@@ -7,7 +7,10 @@ class  AddContact extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     validateName(name) {
-        return name.length>2;
+        if (name.length > 2) {
+            return true;
+        }
+        this.refs.name.classList.add()
     }
     validateCompany(company) {
         return company.length>2;
@@ -45,6 +48,32 @@ class  AddContact extends Component {
                         this.refs.phone.value=
                             this.refs.picture.value='';
             this.props.setAddMode(false);
+        } else {
+            if (this.validateName(this.refs.name.value)) {
+                this.refs.name.parentElement.className = "field";
+            } else {
+                this.refs.name.parentElement.className = "field error";
+            }
+            if (this.validateCompany(this.refs.company.value)) {
+                this.refs.company.parentElement.className = "field";
+            } else {
+                this.refs.company.parentElement.className = "field error";
+            }
+            if (this.validateEmail(this.refs.email.value)) {
+                this.refs.email.parentElement.className = "field";
+            } else {
+                this.refs.email.parentElement.className = "field error";
+            }
+            if (this.validatePhone(this.refs.phone.value)) {
+                this.refs.phone.parentElement.className = "field";
+            } else {
+                this.refs.phone.parentElement.className = "field error";
+            }
+            if (this.validatePicture(this.refs.picture.value)) {
+                this.refs.picture.parentElement.className = "field";
+            } else {
+                this.refs.picture.parentElement.className = "field error";
+            }
         }
     }
 
@@ -53,7 +82,7 @@ class  AddContact extends Component {
             <form className="ui form" onSubmit={this.handleSubmit}>
                 <div className="field">
                     <label>Фамилия и имя</label>
-                    <input ref="name" type="text" placeholder="Фамилия и имя" required/>
+                    <input ref="name" type="text" placeholder="Фамилия и имя" />
                 </div>
                 <div className="field">
                     <label>Компания</label>
@@ -61,7 +90,7 @@ class  AddContact extends Component {
                 </div>
                 <div className="field">
                     <label>Email</label>
-                    <input ref="email" type="email" placeholder="Email"/>
+                    <input ref="text" type="email" placeholder="Email"/>
                 </div>
                 <div className="field">
                     <label>Телефон</label>
