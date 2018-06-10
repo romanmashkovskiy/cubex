@@ -20,7 +20,7 @@ class  ContactList extends Component {
                     <div className="ui middle aligned divided list">
                         {
 
-                            this.props.filtered.map ((contact) => {
+                            this.props.contacts.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
                                              delete={this.props.deleteContact} edit={this.props.editContact}
@@ -39,7 +39,7 @@ class  ContactList extends Component {
                     <div className="ui middle aligned divided list">
                         {
 
-                            this.props.filtered.map ((contact) => {
+                            this.props.contacts.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
                                              delete={this.props.deleteContact} edit={this.props.editContact}
@@ -57,7 +57,7 @@ class  ContactList extends Component {
 
 function mapStateToProps (state) {
     return {
-        filtered: state.filtered,
+        contacts: state.contacts,
         addMode: state.addMode,
     };
 }

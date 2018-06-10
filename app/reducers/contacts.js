@@ -1,109 +1,110 @@
 let contacts = [
-        {
-            id: 1,
-            name: "Иван Иванов",
-            company: "Microsoft",
-            email: "ivanov@microsoft.com",
-            phone: "111-1111-1111",
-            picture: "https://avatarko.ru/img/kartinka/15/multfilm_ochki_Simpsons_Homer_14019.jpg",
-            editMode: false
-        },
-        {
-            id: 2,
-            name: "Петр Петров",
-            company: "Google",
-            email: "petrov@gmail.com",
-            phone: "222-2222-2222",
-            picture: "https://avatarko.ru/img/kartinka/1/multfilm_gomer.png",
-            editMode: false
-        },
-        {
-            id: 3,
-            name: "Сергей Сидоров",
-            company: "Facebook",
-            email: "sidorov@facebook.com",
-            phone: "333-3333-3333",
-            picture: "https://avatarko.ru/img/kartinka/14/multfilm_Simpsons_Homer_13344.jpg",
-            editMode: false
-        },
-        {
-            id: 4,
-            name: "Александр Иванов",
-            company: "Apple",
-            email: "ivanov@facebook.com",
-            phone: "444-4444-4444",
-            picture: "https://avatarko.ru/img/kartinka/1/Gomer_s_pistoletom.jpg",
-            editMode: false
-        }
-    ];
+    {
+        id: 1,
+        name: "Иван Иванов",
+        company: "Microsoft",
+        email: "ivanov@microsoft.com",
+        phone: "111-1111-1111",
+        picture: "https://avatarko.ru/img/kartinka/15/multfilm_ochki_Simpsons_Homer_14019.jpg",
+        editMode: false
+    },
+    {
+        id: 2,
+        name: "Петр Петров",
+        company: "Google",
+        email: "petrov@gmail.com",
+        phone: "222-2222-2222",
+        picture: "https://avatarko.ru/img/kartinka/1/multfilm_gomer.png",
+        editMode: false
+    },
+    {
+        id: 3,
+        name: "Сергей Сидоров",
+        company: "Facebook",
+        email: "sidorov@facebook.com",
+        phone: "333-3333-3333",
+        picture: "https://avatarko.ru/img/kartinka/14/multfilm_Simpsons_Homer_13344.jpg",
+        editMode: false
+    },
+    {
+        id: 4,
+        name: "Александр Иванов",
+        company: "Apple",
+        email: "ivanov@facebook.com",
+        phone: "444-4444-4444",
+        picture: "https://avatarko.ru/img/kartinka/1/Gomer_s_pistoletom.jpg",
+        editMode: false
+    }
+];
 
 export default function (state=contacts, action) {
     switch (action.type) {
         case "FILTER_LIST":
-            {
-                let filteredList = contacts.filter(function(contact){
-                   return contact.name.toLowerCase().includes(action.payload.toLowerCase());
-                });
-                return [...filteredList];
-            }
+        {
+            let filteredList = contacts.filter(function(contact){
+                return contact.name.toLowerCase().includes(action.payload.toLowerCase());
+            });
+            return [...filteredList];
+        }
         case "ADD_CONTACT":
-            {
-                let maxId = 0;
-                state.forEach(function(item) {
-                    if (item.id > maxId) maxId = item.id;
-                });
-                let newContact = {
-                    id: ++maxId,
-                    name: action.payload.name,
-                    company: action.payload.company,
-                    email: action.payload.email,
-                    phone: action.payload.phone,
-                    picture: action.payload.picture,
-                    editMode: false
-                };
-                contacts.push(newContact);
-                return [...contacts];
+        {
+            let maxId = 0;
+            state.forEach(function(item) {
+                if (item.id > maxId) maxId = item.id;
+            });
+            const newContact = {
+                id: ++maxId,
+                name: action.payload.name,
+                company: action.payload.company,
+                email: action.payload.email,
+                phone: action.payload.phone,
+                picture: action.payload.picture,
+                editMode: false
+            };
+            // из-за того, что использую статические данные приходится пушить в исходный массив,
+            // хоть это и протеворечит концепции Redux
+            // Пока не придумал как решить эту проблему
+            contacts.push(newContact);
+            return [...contacts];
 
 
-            }
+        }
         case "DELETE_CONTACT":
-            {
-                let delIndex;
-                state.forEach(function(item, index) {
-                    if (action.payload.id === item.id) delIndex = index;
-                });
-                console.log(delIndex);
-                let filteredList = state.filter(function(contact, index){
-                    return index !== delIndex;
-                });
-                contacts.splice(delIndex,1);
-                return [...filteredList];
+        {
+            const delIndex = state.findIndex((item) => action.payload.id === item.id);
+            if (delIndex === -1) console.error("No contact to delete");
+            let filteredList = state.filter(function(contact, index){
+                return index !== delIndex;
+            });
+            // из-за того, что использую статические данные приходится пушить в исходный массив,
+            // хоть это и протеворечит концепции Redux
+            // Пока не придумал как решить эту проблему
+            contacts.splice(delIndex,1);
+            return [...filteredList];
 
-            }
+        }
         case "EDIT_CONTACT":
-            {
-                let replIndex;
-                state.forEach(function(item, index) {
-                    if (action.payload.id === item.id) replIndex = index;
-                });
-                delete state[replIndex];
-                state[replIndex] = action.payload;
-
-                delete contacts[replIndex];
-                contacts[replIndex] = action.payload;
-
-                return [...state];
-            }
+        {
+            const replIndex = state.findIndex((item) => action.payload.id === item.id);
+            if (replIndex === -1) console.error("No contact to update");
+            state[replIndex] = action.payload;
+            // из-за того, что использую статические данные приходится пушить в исходный массив,
+            // хоть это и протеворечит концепции Redux
+            // Пока не придумал как решить эту проблему
+            contacts[replIndex] = action.payload;
+            return [...state];
+        }
         case "EDIT_MODE":
-            {
-                let editIndex;
-                state.forEach(function(item, index) {
-                    if (action.contact.id === item.id) editIndex = index;
-                });
-                state[editIndex].editMode = action.mode;
-                contacts[editIndex].editMode = action.mode;
-                return [...state];
-            }
+        {
+            const editIndex = state.findIndex((item) => action.contact.id === item.id);
+            if (editIndex === -1) console.error("No contact to set edit mode");
+            state[editIndex].editMode = action.mode;
+            // из-за того, что использую статические данные приходится пушить в исходный массив,
+            // хоть это и протеворечит концепции Redux
+            // Пока не придумал как решить эту проблему
+            contacts[editIndex].editMode = action.mode;
+            return [...state];
+        }
         default:
             return state;
     }
