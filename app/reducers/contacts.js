@@ -39,13 +39,6 @@ let contacts = [
 
 export default function (state=contacts, action) {
     switch (action.type) {
-        case "FILTER_LIST":
-        {
-            let filteredList = contacts.filter(function(contact){
-                return contact.name.toLowerCase().includes(action.payload.toLowerCase());
-            });
-            return [...filteredList];
-        }
         case "ADD_CONTACT":
         {
             let maxId = 0;
@@ -61,11 +54,7 @@ export default function (state=contacts, action) {
                 picture: action.payload.picture,
                 editMode: false
             };
-            // из-за того, что использую статические данные приходится пушить в исходный массив,
-            // хоть это и протеворечит концепции Redux
-            // Пока не придумал как решить эту проблему
-            contacts.push(newContact);
-            return [...contacts];
+            return [...state, newContact];
 
 
         }
@@ -76,10 +65,6 @@ export default function (state=contacts, action) {
             let filteredList = state.filter(function(contact, index){
                 return index !== delIndex;
             });
-            // из-за того, что использую статические данные приходится пушить в исходный массив,
-            // хоть это и протеворечит концепции Redux
-            // Пока не придумал как решить эту проблему
-            contacts.splice(delIndex,1);
             return [...filteredList];
 
         }
@@ -88,10 +73,6 @@ export default function (state=contacts, action) {
             const replIndex = state.findIndex((item) => action.payload.id === item.id);
             if (replIndex === -1) console.error("No contact to update");
             state[replIndex] = action.payload;
-            // из-за того, что использую статические данные приходится пушить в исходный массив,
-            // хоть это и протеворечит концепции Redux
-            // Пока не придумал как решить эту проблему
-            contacts[replIndex] = action.payload;
             return [...state];
         }
         case "EDIT_MODE":
@@ -99,10 +80,6 @@ export default function (state=contacts, action) {
             const editIndex = state.findIndex((item) => action.contact.id === item.id);
             if (editIndex === -1) console.error("No contact to set edit mode");
             state[editIndex].editMode = action.mode;
-            // из-за того, что использую статические данные приходится пушить в исходный массив,
-            // хоть это и протеворечит концепции Redux
-            // Пока не придумал как решить эту проблему
-            contacts[editIndex].editMode = action.mode;
             return [...state];
         }
         default:

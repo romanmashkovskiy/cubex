@@ -43,6 +43,7 @@ class  AddContact extends Component {
                         this.refs.phone.value=
                             this.refs.picture.value='';
             this.props.setAddMode(false);
+
         } else {
             if (this.validateName(this.refs.name.value)) {
                 this.refs.name.parentElement.className = "field";
@@ -88,7 +89,7 @@ class  AddContact extends Component {
                     <input ref="email" type="text" placeholder="Email"/>
                 </div>
                 <div className="field">
-                    <label>Телефон в формате</label>
+                    <label>Телефон</label>
                     <input ref="phone" type="text" placeholder="Телефон" />
                 </div>
                 <div className="field">

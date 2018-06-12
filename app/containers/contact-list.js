@@ -2,25 +2,66 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import Contact from './contact';
-import SearchPlugin from './search-plugin';
 import  AddContact from '../containers/add-contact'
 import { setEditMode, setAddMode, editContact, deleteContact, addContact, select, filter} from "../actions";
 
+class  SearchPlugin extends Component {
+    constructor(props){
+        super(props);
+        this.onTextChanged = this.onTextChanged.bind(this);
+    }
 
-class  ContactList extends Component {
+    onTextChanged(e){
+        let text = e.target.value.trim();
+        this.props.filter(text);
+    }
 
     render() {
+        return (
+            <div className="ui small icon input">
+                <input type="text" placeholder="Найти контакт" onChange={this.onTextChanged}/>
+                <i className="search icon"></i>
+            </div>
+        );
+    }
+}
+
+
+class  ContactList extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            currentlyDisplayed: this.props.contacts
+        }
+        this.filterList = this.filterList.bind(this);
+        console.log("constructor");
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({currentlyDisplayed: nextProps.contacts});
+    }
+
+    filterList(text){
+        let filteredList = this.props.contacts.filter(function(contact){
+            return contact.name.toLowerCase().includes(text.toLowerCase());
+        });
+        this.setState({currentlyDisplayed: filteredList});
+    }
+
+    render() {
+        console.log("render()");
         if (this.props.addMode) {
             return (
                 <div>
-                    <SearchPlugin filter={this.props.filter}/>
+                    <SearchPlugin filter={this.filterList}/>
                     <button className="ui secondary button right floated" onClick={() => this.props.setAddMode(false)}>Отменить добавление</button>
                     <h3 className="ui header">Внесите данные</h3>
-                    <AddContact addContact={this.props.addContact} setAddMode={this.props.setAddMode}/>
+                    <AddContact state={this.state} addContact={this.props.addContact} setAddMode={this.props.setAddMode}/>
                     <div className="ui middle aligned divided list">
                         {
 
-                            this.props.contacts.map ((contact) => {
+                            this.state.currentlyDisplayed.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
                                              delete={this.props.deleteContact} edit={this.props.editContact}
@@ -34,12 +75,13 @@ class  ContactList extends Component {
         } else {
             return (
                 <div>
-                    <SearchPlugin filter={this.props.filter}/>
+
+                    <SearchPlugin filter={this.filterList}/>
                     <button className="ui positive button right floated" onClick={() => this.props.setAddMode(true)}>Добавить контакт</button>
                     <div className="ui middle aligned divided list">
                         {
 
-                            this.props.contacts.map ((contact) => {
+                            this.state.currentlyDisplayed.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
                                              delete={this.props.deleteContact} edit={this.props.editContact}
@@ -65,7 +107,6 @@ function mapStateToProps (state) {
 function matchDispatchToProps (dispatch) {
     return bindActionCreators({
         select: select,
-        filter: filter,
         addContact: addContact,
         deleteContact: deleteContact,
         editContact: editContact,

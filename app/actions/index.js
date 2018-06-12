@@ -5,13 +5,6 @@ export const select = (contact) => {
     }
 };
 
-export const filter = (text) => {
-    return {
-        type: "FILTER_LIST",
-        payload: text
-    }
-};
-
 export const addContact = (contact) => {
     return {
         type: "ADD_CONTACT",
