@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import Contact from './contact';
 import  AddContact from '../containers/add-contact'
-import { setEditMode, setAddMode, editContact, deleteContact, addContact, select, filter} from "../actions";
+import { setEditMode, setAddMode, editContact, deleteContact, addContact, select} from "../actions";
 
 class  SearchPlugin extends Component {
     constructor(props){
