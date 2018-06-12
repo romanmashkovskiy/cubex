@@ -2,30 +2,9 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import Contact from './contact';
+import SearchPlugin from './search-plugin';
 import  AddContact from '../containers/add-contact'
 import { setEditMode, setAddMode, editContact, deleteContact, addContact, select} from "../actions";
-
-class  SearchPlugin extends Component {
-    constructor(props){
-        super(props);
-        this.onTextChanged = this.onTextChanged.bind(this);
-    }
-
-    onTextChanged(e){
-        let text = e.target.value.trim();
-        this.props.filter(text);
-    }
-
-    render() {
-        return (
-            <div className="ui small icon input">
-                <input type="text" placeholder="Найти контакт" onChange={this.onTextChanged}/>
-                <i className="search icon"></i>
-            </div>
-        );
-    }
-}
-
 
 class  ContactList extends Component {
     constructor(props) {
