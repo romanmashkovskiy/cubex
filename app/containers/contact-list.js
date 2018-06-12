@@ -29,13 +29,11 @@ class  SearchPlugin extends Component {
 
 class  ContactList extends Component {
     constructor(props) {
-        super(props)
-
+        super(props);
         this.state = {
             currentlyDisplayed: this.props.contacts
-        }
+        };
         this.filterList = this.filterList.bind(this);
-        console.log("constructor");
     }
 
     componentWillReceiveProps(nextProps) {
@@ -50,7 +48,6 @@ class  ContactList extends Component {
     }
 
     render() {
-        console.log("render()");
         if (this.props.addMode) {
             return (
                 <div>
@@ -60,7 +57,6 @@ class  ContactList extends Component {
                     <AddContact state={this.state} addContact={this.props.addContact} setAddMode={this.props.setAddMode}/>
                     <div className="ui middle aligned divided list">
                         {
-
                             this.state.currentlyDisplayed.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
@@ -75,12 +71,10 @@ class  ContactList extends Component {
         } else {
             return (
                 <div>
-
                     <SearchPlugin filter={this.filterList}/>
                     <button className="ui positive button right floated" onClick={() => this.props.setAddMode(true)}>Добавить контакт</button>
                     <div className="ui middle aligned divided list">
                         {
-
                             this.state.currentlyDisplayed.map ((contact) => {
                                 return (
                                     <Contact key={contact.id} contact={contact} select={this.props.select}
@@ -93,7 +87,6 @@ class  ContactList extends Component {
                 </div>
             )
         }
-
     }
 }
 
